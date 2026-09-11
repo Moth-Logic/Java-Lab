@@ -1,15 +1,23 @@
 package Logica;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.temporal.ChronoUnit;  // For calculating years between dates
 
+// Empleado (Employee) class — demonstrates OOP with validation and computed properties.
+// Key concepts shown:
+// - Constructor validation: throws Exception if any field is invalid (defensive programming)
+// - Private fields + getters/setters (encapsulation)
+// - Computed properties: edad (age) and antiguedad (tenure) are calculated, not stored
+// - Private helper method: calcularAños() is reused by both calcularEdad() and calcularAntiguedad()
 public class Empleado {
-    private String id;
-    private String nombre;
-    private String domicilio;
-    private LocalDate fechaNacimiento;
-    private LocalDate fechaIngreso;
+    private String id;                  // Employee ID
+    private String nombre;              // Full name
+    private String domicilio;           // Address/home
+    private LocalDate fechaNacimiento;  // Date of birth
+    private LocalDate fechaIngreso;     // Date they started working here
 
+    // Constructor with full validation — every field is checked before accepting.
+    // This is "defensive programming": reject bad data early rather than debug later.
     public Empleado(String id, String nombre, String domicilio, LocalDate fechaNacimiento, LocalDate fechaIngreso) throws Exception {
         if (id == null || id.isEmpty())
             throw new Exception("Id can't be empty.");
@@ -33,6 +41,7 @@ public class Empleado {
         return id;
     }
 
+    // Setter with validation: even after creation, you can't set an empty ID.
     public void setId(String id) throws Exception {
         if (id == null || id.isEmpty())
             throw new Exception("Id can't be empty.");
@@ -71,15 +80,19 @@ public class Empleado {
         this.fechaIngreso = fechaIngreso;
     }
 
+    // Private helper: calculates how many full years have passed since 'fecha'.
+    // Used by both calcularEdad() and calcularAntiguedad() to avoid code duplication.
     private Integer calcularAños(LocalDate fecha) {
         LocalDate hoy = LocalDate.now();
-        return (int) ChronoUnit.YEARS.between(fecha, hoy);
+        return (int) ChronoUnit.YEARS.between(fecha, hoy);  // Count full years between dates
     }
 
+    // Computed property: the employee's current age (not stored, calculated on demand).
     public Integer calcularEdad() {
         return calcularAños(fechaNacimiento);
     }
 
+    // Computed property: how many years the employee has worked here.
     public Integer calcularAntiguedad() {
         return calcularAños(fechaIngreso);
     }
