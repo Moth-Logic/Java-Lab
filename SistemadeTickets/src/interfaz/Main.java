@@ -1,7 +1,6 @@
 package interfaz;
 
 import java.util.Scanner;
-
 import logica.SistemaTickets;
 import logica.Ticket;
 
