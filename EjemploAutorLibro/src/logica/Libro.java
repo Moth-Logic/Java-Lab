@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Libro {
 		this.isbn = isbn;
 		this.editorial = editorial;
 		this.fechaPublicacion = fechaPublicacion;
+		this.autores = new ArrayList<>();
 	}
 
 	public String getTitulo() {
@@ -52,6 +54,8 @@ public class Libro {
 	}
 	
 	public void agregarAutor(Autor autor) {
+		if (autor == null)
+			throw new IllegalArgumentException("El autor no puede ser nulo.");
 		this.autores.add(autor);
 	}
 	

@@ -28,8 +28,7 @@ public class Empleado {
         if (fechaNacimiento == null || fechaIngreso == null)
             throw new Exception("Dates can't be null.");
         if (fechaNacimiento.equals(fechaIngreso))
-            throw xception("Both Dates can't be the same.");
-        new E
+            throw new Exception("Both Dates can't be the same.");
         this.id = id;
         this.nombre = nombre;
         this.domicilio = domicilio;
