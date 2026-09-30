@@ -1,6 +1,7 @@
 package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -22,6 +23,11 @@ public class Equipo {
 		this.jugadores = new ArrayList<Miembro>();
 		if (entrenador != null) {
 			setEntrenador(entrenador);
+		}
+		if (jugadores != null) {
+			for (Miembro jugador : jugadores) {
+				agregarJugador(jugador);
+			}
 		}
 	}
 
@@ -61,6 +67,10 @@ public class Equipo {
 		return entrenador;
 	}
 
+	public List<Miembro> getJugadores() {
+		return Collections.unmodifiableList(jugadores);
+	}
+
 	public void setEntrenador(Miembro entrenador) {
 		if (entrenador == null)
 			throw new IllegalArgumentException("El entrenador no puede ser nulo.");
@@ -69,10 +79,12 @@ public class Equipo {
 	}
 	
 	public void setEntrenador(String nombre, LocalDate fechaNac, Double altura, Double peso) {
-		this.entrenador = new Miembro(nombre, fechaNac, altura, peso, Rol.DIRECTOR_TECNICO);
+		setEntrenador(new Miembro(nombre, fechaNac, altura, peso, Rol.DIRECTOR_TECNICO));
 	}
 	
 	public void agregarJugador(Miembro jugador) {
+		if (jugador == null)
+			throw new IllegalArgumentException("El jugador no puede ser nulo.");
 		jugadores.add(jugador);
 	}
 	
@@ -96,7 +108,7 @@ public class Equipo {
 	@Override
 	public String toString() {
 		String result = "Equipo:" + nombre + "\n";
-		result += "Fundacion:" + fundacion.toString() + "\n";
+		result += "Fundacion:" + fundacion + "\n";
 		result += "Estadio: " + estadio + ", " + ubicacion + "\n";
 		result += "Entrenador: " + (entrenador != null ? entrenador.getNombre() : "(sin asignar)") + "\n";
 		result += "Jugadores: \n";

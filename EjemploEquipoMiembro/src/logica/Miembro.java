@@ -1,5 +1,6 @@
 package logica;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Miembro {
 	private String nombre;
@@ -9,12 +10,11 @@ public class Miembro {
 	private Rol rol;
 	
 	public Miembro(String nombre, LocalDate fechaNac, Double altura, Double peso, Rol rol) {
-		super();
-		this.nombre = nombre;
+		setNombre(nombre);
 		this.fechaNac = fechaNac;
 		this.altura = altura;
 		this.peso = peso;
-		this.rol = rol;
+		setRol(rol);
 	}
 
 	public String getNombre() {
@@ -22,7 +22,7 @@ public class Miembro {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo.");
 	}
 
 	public LocalDate getFechaNac() {
@@ -54,7 +54,7 @@ public class Miembro {
 	}
 
 	public void setRol(Rol rol) {
-		this.rol = rol;
+		this.rol = Objects.requireNonNull(rol, "El rol no puede ser nulo.");
 	}
 	
 	
