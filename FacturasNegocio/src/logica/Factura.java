@@ -59,5 +59,27 @@ public class Factura {
 		}
 	}
 
+	public Double calcularMontoImpuesto() {
+		return calcularSubtotal() * impuesto;
+	}
 
+	public Double calcularTotal() {
+		return calcularSubtotal() + calcularMontoImpuesto();
+	}
+
+	@Override
+	public String toString() {
+		String result = "Tienda Backrooms";
+		result += "No. factura " + codigo + " - Fecha: " + fechaHora + "\n";
+		result += "Cant.\tCod.\tDesc.\tPrecio\tCosto\n";
+		for (Linea linea : lineas) {
+			Producto p = linea.getProducto();
+			result += linea.getCantidad() + "\t" + p.getCodigo() + "\t" + p.getDescripcion() + "\t" + p.getPrecio()
+					+ "\t" + (linea.getCantidad() * p.getPrecio()) + "\n";
+		}
+		result += "Subtotal: " + calcularSubtotal() + "\n";
+		result += "Impuesto: " + calcularMontoImpuesto() + "\n";
+		result += "Total: " + calcularTotal() + "\n";
+		return result;
+	}
 }
