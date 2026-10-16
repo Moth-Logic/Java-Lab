@@ -38,10 +38,10 @@ public class Cliente {
 	}
 
 	public void agregarOrden(Orden orden) {
-		// TODO
+		
 	}
 
 	public void borrarOrden(Orden orden) {
-		// TODO
+	
 	}
 }
