@@ -1,9 +1,12 @@
 package wallrose;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Map;
+import java.util.TreeMap;
 
-public class Cliente {
+public class Cliente implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 	private String nombre;
@@ -14,7 +17,7 @@ public class Cliente {
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
-		this.ordenes = new HashMap<>();
+		this.ordenes = new TreeMap<>();
 	}
 
 	public String getId() {
@@ -29,6 +32,10 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -38,10 +45,10 @@ public class Cliente {
 	}
 
 	public void agregarOrden(Orden orden) {
-		
+		ordenes.put(orden.getNumero(), orden);
 	}
 
 	public void borrarOrden(Orden orden) {
-	
+		ordenes.remove(orden.getNumero());
 	}
 }

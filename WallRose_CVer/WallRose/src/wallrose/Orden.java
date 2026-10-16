@@ -1,10 +1,13 @@
 package wallrose;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orden {
+public class Orden implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer numero;
 	private LocalDate fecha;
@@ -44,36 +47,46 @@ public class Orden {
 		return cliente;
 	}
 
+	// Suma del costo de todas las lineas (sin impuesto)
 	public Double calcularMonto() {
-		// TODO
-		return 0.0;
+		double monto = 0.0;
+		for (LineaOrden linea : lineas) {
+			monto += linea.calcularCosto();
+		}
+		return monto;
 	}
 
 	public Double calcularMontoImpuesto() {
-		// TODO
-		return 0.0;
+		return calcularMonto() * ControladoraWallRose.getInstance().getIV();
 	}
 
 	public Double calcularMontoTotal() {
-		// TODO
-		return 0.0;
+		return calcularMonto() + calcularMontoImpuesto();
 	}
 
 	public void agregarLinea(LineaOrden linea) {
-		// TODO
+		lineas.add(linea);
 	}
 
+	// numeroLinea va de 1 a cantidadLineas()
 	public void borrarLinea(Integer numeroLinea) {
-		// TODO
+		verificarNumeroLinea(numeroLinea);
+		lineas.remove(numeroLinea - 1);
 	}
 
 	public Integer cantidadLineas() {
-		// TODO
-		return 0;
+		return lineas.size();
 	}
 
+	// numeroLinea va de 1 a cantidadLineas()
 	public LineaOrden getLinea(Integer numeroLinea) {
-		// TODO
-		return null;
+		verificarNumeroLinea(numeroLinea);
+		return lineas.get(numeroLinea - 1);
+	}
+
+	private void verificarNumeroLinea(Integer numeroLinea) {
+		if (numeroLinea == null || numeroLinea < 1 || numeroLinea > lineas.size()) {
+			throw new IllegalArgumentException("La linea " + numeroLinea + " no existe en la orden " + numero);
+		}
 	}
 }

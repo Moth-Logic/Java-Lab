@@ -1,6 +1,10 @@
 package wallrose;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer codigo;
 	private String nombre;

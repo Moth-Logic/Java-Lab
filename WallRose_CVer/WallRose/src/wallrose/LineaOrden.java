@@ -1,6 +1,10 @@
 package wallrose;
 
-public class LineaOrden {
+import java.io.Serializable;
+
+public class LineaOrden implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Producto producto;
 	private Double cantidad;
